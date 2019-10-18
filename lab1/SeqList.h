@@ -6,12 +6,13 @@
 #define LAB_DS_SEQLIST_H
 #define INIT_LENGTH 8
 #define INCREASE_LENGTH 8
-#define ERROR_OVERFLOW -2
-#define ERROR_EMPTY "List is empty!"
-#define ERROR_INDEX_INVALID "Index invalid!"
-#define ERROR_NO_ELEMENT "No prior/next element founded!"
+#define ERROR_OVERFLOW (-2)
+#define ERROR_EMPTY runtime_error("List is empty!")
+#define ERROR_INDEX_INVALID runtime_error("Index invalid!")
+#define ERROR_NO_ELEMENT runtime_error("No prior/next element founded!")
 
 #include <string>
+#include <exception>
 
 using std::string;
 
@@ -26,9 +27,9 @@ public:
 
 //    ~SeqList();
 
-    void save(string file_name);
+    void save(const string& file_name);
 
-    void load(string file_name);
+    void load(const string& file_name);
 
     static void destroy(SeqList * L);
 
@@ -48,11 +49,13 @@ public:
 
     T &insertBefore(int index, T elem); // Covered
 
-    T &remove(int index); // Covered
+    T remove(int index); // Covered
 
     void forEach(void (*callback)(T &elem)); // Covered
 
     int push(T); // Covered
+
+    T pop();
 };
 
 #endif //LAB_DS_SEQLIST_H

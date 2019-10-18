@@ -22,11 +22,11 @@ SeqList<T>::SeqList() {
     }
 }
 
-template <typename T>
-void SeqList<T>::save(string file_name) {
+template<typename T>
+void SeqList<T>::save(const string& file_name) {
     ofstream f;
     f.open(file_name);
-    for(int i = 1;i<=this->length;i++){
+    for (int i = 1; i <= this->length; i++) {
         f << this->get(i);
         f << " ";
     }
@@ -34,12 +34,12 @@ void SeqList<T>::save(string file_name) {
     f.close();
 }
 
-template <typename T>
-void SeqList<T>::load(string file_name) {
+template<typename T>
+void SeqList<T>::load(const string& file_name) {
     this->clear();
     fstream f(file_name, std::ios_base::in);
     T val;
-    while(f>>val) {
+    while (f >> val) {
         this->push(val);
     }
 }
@@ -86,7 +86,6 @@ int SeqList<T>::locate(T target, bool (*compare)(T &, T &)) {
     return 0;
 }
 
-// Covered
 template<typename T>
 T &SeqList<T>::prior(T target) {
     if (this->isEmpty()) {
@@ -103,7 +102,6 @@ T &SeqList<T>::prior(T target) {
     }
 }
 
-// Covered
 template<typename T>
 T &SeqList<T>::next(T target) {
     if (this->isEmpty()) {
@@ -120,7 +118,6 @@ T &SeqList<T>::next(T target) {
     }
 }
 
-// Covered
 template<typename T>
 T &SeqList<T>::insertBefore(int index, T elem) {
     if (index < 1 || index > this->length + 1) {
@@ -145,18 +142,18 @@ T &SeqList<T>::insertBefore(int index, T elem) {
 }
 
 template<typename T>
-T &SeqList<T>::remove(int index) {
+T SeqList<T>::remove(int index) {
     if (index < 1 || index > this->length) {
         throw ERROR_INDEX_INVALID;
     }
-    T *p, *q, *e;
+    T *p = 0, *q = 0, e;
     p = &this->get(index);
-    *e = *p;
+    e = *p;
     q = this->elem + this->length - 1;
     for (++p; p <= q; ++p)
         *(p - 1) = *p;
     this->length--;
-    return *e;
+    return e;
 }
 
 template<typename T>
@@ -170,7 +167,16 @@ int SeqList<T>::push(T target) {
         this->size += INCREASE_LENGTH;
     }
     this->elem[this->getLength()] = target;
-    this->length++;
+    return ++this->length;
+}
+
+template<typename T>
+T SeqList<T>::pop() {
+    try {
+        return this->remove(this->length);
+    } catch (exception &e) {
+        throw e;
+    }
 }
 
 template<typename T>
