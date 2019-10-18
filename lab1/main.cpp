@@ -11,17 +11,14 @@ typedef int ElemType;
 
 using std::to_string;
 
-#ifdef _WIN32
-int clear() {
+void clear() {
+    #ifdef _WIN32
     system("cls");
-}
-#else
-
-int clear() {
+    #else
     system("clear");
+    #endif
 }
 
-#endif
 
 template<typename T>
 void displayMenu(SeqList<T> *seqLists[], int index) {
@@ -70,7 +67,7 @@ int main() {
                 case 2: {
                     clear();
                     cout << "DestroyList" << endl;
-                    SeqList<ElemType>::destroy(seqLists[index]);
+                    SeqList<ElemType>::destroy(&seqLists[index]);
                     break;
                 }
                 case 3: {

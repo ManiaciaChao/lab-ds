@@ -45,9 +45,12 @@ void SeqList<T>::load(const string& file_name) {
 }
 
 template<typename T>
-void SeqList<T>::destroy(SeqList *L) {
-    free(L->elem);
-    free(L);
+void SeqList<T>::destroy(SeqList ** L) {
+    free((*L)->elem);
+    *L = nullptr;
+//    free(L);
+//    L = nullptr;
+//    cout<<"!"<<std::endl;
 }
 
 template<typename T>
