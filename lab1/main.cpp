@@ -2,26 +2,25 @@
 // Created by user24 on 2019/10/17.
 //
 #define LIST_NUM 8
-
 typedef int ElemType;
 
 #include <cstring>
 #include "SeqList.h"
-#include "SeqList.cpp"
 
 using std::to_string;
+using std::cin;
+using std::cout;
+using std::endl;
+using std::exception;
 
+int clear() {
 #ifdef _WIN32
-int clear() {
     system("cls");
-}
 #else
-
-int clear() {
     system("clear");
+#endif
 }
 
-#endif
 
 template<typename T>
 void displayMenu(SeqList<T> *seqLists[], int index) {
@@ -70,7 +69,7 @@ int main() {
                 case 2: {
                     clear();
                     cout << "DestroyList" << endl;
-                    SeqList<ElemType>::destroy(seqLists[index]);
+                    SeqList<ElemType>::destroy(&seqLists[index]);
                     break;
                 }
                 case 3: {
@@ -141,7 +140,7 @@ int main() {
                     cout << "ListDelete" << endl;
                     int i = 0;
                     cin >> i;
-                    cout<<seqLists[index]->remove(i) <<endl;
+                    cout << seqLists[index]->remove(i) << endl;
                     break;
                 }
                 case 12: {
@@ -188,7 +187,7 @@ int main() {
                     continue;
                 }
                 default: {
-
+                    break;
                 }
             }
         } catch (exception &e) {
