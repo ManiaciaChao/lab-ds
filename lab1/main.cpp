@@ -13,12 +13,13 @@ using std::cout;
 using std::endl;
 using std::exception;
 
-int clear() {
-#ifdef _WIN32
+
+void clear() {
+    #ifdef _WIN32
     system("cls");
-#else
+    #else
     system("clear");
-#endif
+    #endif
 }
 
 
