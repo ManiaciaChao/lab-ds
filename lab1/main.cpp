@@ -13,21 +13,21 @@ using std::cout;
 using std::endl;
 using std::exception;
 
-
 void clear() {
-    #ifdef _WIN32
+#ifdef _WIN32 // on Windows Command Line
     system("cls");
-    #else
+#else // on Unix and Unix-like shell
     system("clear");
-    #endif
+#endif
 }
 
 
 template<typename T>
 void displayMenu(SeqList<T> *seqLists[], int index) {
+    // Rewrite menu display function with printf.
     printf("----------------------------------------\n");
     printf("** Current Index is %d **\n", index);
-    if (seqLists[index] == nullptr) {
+    if (seqLists[index] == nullptr ) {
         printf("%-20s%-20s\n", "1. InitList", "20. ChangeIndex");
     } else {
         printf("%-20s%-20s\n", "1. InitList", "10. ListInsert");
@@ -43,6 +43,7 @@ void displayMenu(SeqList<T> *seqLists[], int index) {
 }
 
 int main() {
+    // Initialize a pointer array for multi-list management.
     SeqList<ElemType> *seqLists[LIST_NUM];
     memset(seqLists, 0, sizeof(seqLists));
     int option = 1;
@@ -51,9 +52,10 @@ int main() {
     while (option) {
         try {
             displayMenu(seqLists, index);
-            cin >> option;
+            cin >> option; // accept keyboard input as option
             clear();
             if (seqLists[index] == nullptr && (option != 1 && option != 20 && option != 0)) {
+                // To avoid nullptr being operated.
                 cout << "Exception: " << "List Not Initialized!" << endl;
                 continue;
             }
@@ -70,7 +72,8 @@ int main() {
                 case 2: {
                     clear();
                     cout << "DestroyList" << endl;
-                    SeqList<ElemType>::destroy(&seqLists[index]);
+                    SeqList<ElemType>::destroy(*seqLists[index]); // Free space
+                    seqLists[index]= nullptr; // Assign nullptr
                     break;
                 }
                 case 3: {
@@ -106,6 +109,7 @@ int main() {
                     cin >> i;
                     cout << seqLists[index]->locate(
                             i,
+                            // Lambda expression introduced in C++11;
                             [](ElemType &a, ElemType &b) -> bool { return a > b; })
                          << endl;
                     break;
@@ -149,7 +153,7 @@ int main() {
                     cout << "ListTraverse" << endl;
                     seqLists[index]
                             ->forEach([](ElemType &v) -> void {
-                                cout << v << " ";
+                                cout << v << " "; // Lambda expression introduced in C++11;
                             });
                     cout << endl;
                     break;
@@ -184,7 +188,13 @@ int main() {
                 case 20 : {
                     clear();
                     cout << "ChangeIndex" << endl;
-                    cin >> index;
+                    int i;
+                    cin >> i;
+                    if (i>0 && i<LIST_NUM) {
+                        index = i; // Avoid overstepping.
+                    } else {
+                        cout << "Invalid index" << endl;
+                    }
                     continue;
                 }
                 default: {
