@@ -2,11 +2,15 @@
 // Created by user24 on 2019/10/17.
 //
 #define LIST_NUM 8
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6f64abf56672e2083b6d811935c95993048fedb0
 typedef int ElemType;
 
 #include <cstring>
 #include "SeqList.h"
+<<<<<<< HEAD
 #include "SeqList.cpp"
 
 using std::to_string;
@@ -17,14 +21,36 @@ void clear() {
     #else
     system("clear");
     #endif
+=======
+
+using std::to_string;
+using std::cin;
+using std::cout;
+using std::endl;
+using std::exception;
+
+void clear() {
+#ifdef _WIN32 // on Windows Command Line
+    system("cls");
+#else // on Unix and Unix-like shell
+    system("clear");
+#endif
+>>>>>>> 6f64abf56672e2083b6d811935c95993048fedb0
 }
 
 
 template<typename T>
 void displayMenu(SeqList<T> *seqLists[], int index) {
+<<<<<<< HEAD
     printf("----------------------------------------\n");
     printf("** Current Index is %d **\n", index);
     if (seqLists[index] == nullptr) {
+=======
+    // Rewrite menu display function with printf.
+    printf("----------------------------------------\n");
+    printf("** Current Index is %d **\n", index);
+    if (seqLists[index] == nullptr ) {
+>>>>>>> 6f64abf56672e2083b6d811935c95993048fedb0
         printf("%-20s%-20s\n", "1. InitList", "20. ChangeIndex");
     } else {
         printf("%-20s%-20s\n", "1. InitList", "10. ListInsert");
@@ -40,6 +66,10 @@ void displayMenu(SeqList<T> *seqLists[], int index) {
 }
 
 int main() {
+<<<<<<< HEAD
+=======
+    // Initialize a pointer array for multi-list management.
+>>>>>>> 6f64abf56672e2083b6d811935c95993048fedb0
     SeqList<ElemType> *seqLists[LIST_NUM];
     memset(seqLists, 0, sizeof(seqLists));
     int option = 1;
@@ -48,9 +78,16 @@ int main() {
     while (option) {
         try {
             displayMenu(seqLists, index);
+<<<<<<< HEAD
             cin >> option;
             clear();
             if (seqLists[index] == nullptr && (option != 1 && option != 20 && option != 0)) {
+=======
+            cin >> option; // accept keyboard input as option
+            clear();
+            if (seqLists[index] == nullptr && (option != 1 && option != 20 && option != 0)) {
+                // To avoid nullptr being operated.
+>>>>>>> 6f64abf56672e2083b6d811935c95993048fedb0
                 cout << "Exception: " << "List Not Initialized!" << endl;
                 continue;
             }
@@ -67,7 +104,12 @@ int main() {
                 case 2: {
                     clear();
                     cout << "DestroyList" << endl;
+<<<<<<< HEAD
                     SeqList<ElemType>::destroy(&seqLists[index]);
+=======
+                    SeqList<ElemType>::destroy(*seqLists[index]); // Free space
+                    seqLists[index]= nullptr; // Assign nullptr
+>>>>>>> 6f64abf56672e2083b6d811935c95993048fedb0
                     break;
                 }
                 case 3: {
@@ -103,6 +145,10 @@ int main() {
                     cin >> i;
                     cout << seqLists[index]->locate(
                             i,
+<<<<<<< HEAD
+=======
+                            // Lambda expression introduced in C++11;
+>>>>>>> 6f64abf56672e2083b6d811935c95993048fedb0
                             [](ElemType &a, ElemType &b) -> bool { return a > b; })
                          << endl;
                     break;
@@ -138,7 +184,11 @@ int main() {
                     cout << "ListDelete" << endl;
                     int i = 0;
                     cin >> i;
+<<<<<<< HEAD
                     cout<<seqLists[index]->remove(i) <<endl;
+=======
+                    cout << seqLists[index]->remove(i) << endl;
+>>>>>>> 6f64abf56672e2083b6d811935c95993048fedb0
                     break;
                 }
                 case 12: {
@@ -146,7 +196,11 @@ int main() {
                     cout << "ListTraverse" << endl;
                     seqLists[index]
                             ->forEach([](ElemType &v) -> void {
+<<<<<<< HEAD
                                 cout << v << " ";
+=======
+                                cout << v << " "; // Lambda expression introduced in C++11;
+>>>>>>> 6f64abf56672e2083b6d811935c95993048fedb0
                             });
                     cout << endl;
                     break;
@@ -181,11 +235,25 @@ int main() {
                 case 20 : {
                     clear();
                     cout << "ChangeIndex" << endl;
+<<<<<<< HEAD
                     cin >> index;
                     continue;
                 }
                 default: {
 
+=======
+                    int i;
+                    cin >> i;
+                    if (i>0 && i<LIST_NUM) {
+                        index = i; // Avoid overstepping.
+                    } else {
+                        cout << "Invalid index" << endl;
+                    }
+                    continue;
+                }
+                default: {
+                    break;
+>>>>>>> 6f64abf56672e2083b6d811935c95993048fedb0
                 }
             }
         } catch (exception &e) {
