@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 include_directories(${CMAKE_SOURCE_DIR})
 
-add_executable(lab1 lab1/SeqList.h lab1/main.cpp)
+#add_executable(lab1 lab1/SeqList.h lab1/main.cpp)
 #add_executable(lab2 lab2/LinkList.hh)
 add_executable(lab3 lab3/BiNode.hh lab3/BiNode.cc lab3/BiTree.hh lab3/main.cc lab3/BiTree.cc utils/utils.hh lab3/compat.hh)
+add_executable(lab4 lab4/Graph.hh lab4/main.cc lab4/Graph.hh lab4/Graph.cc lab4/compat.hh)

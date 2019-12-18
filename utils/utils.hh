@@ -20,7 +20,7 @@ include "conio.h"
 
 namespace utils {
 
-auto consoleWidth()->size_t {
+auto consoleWidth() -> size_t {
   size_t consoleWidth;
   // get console width
 #ifdef WIN32
@@ -86,6 +86,7 @@ auto hr(char placeHolder = '-') -> void {
   std::cout << std::endl;
 }
 
+#ifdef LAB_DS_LAB3_BINODE_HH_
 template<typename T>
 int printHelper(lab3::BiNode<T> *node, bool isLeft, int offset, int depth, char **buffer) {
   char b[20] = "";
@@ -186,6 +187,7 @@ bool print(lab3::BiTree<T> *tree) {
   return true;
 }
 
+#endif //LAB_DS_LAB3_BINODE_HH_
 }
 
 #endif //LAB_DS_UTILS_UTILS_HH_
