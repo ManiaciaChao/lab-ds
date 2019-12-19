@@ -2,8 +2,8 @@
 // Created by user24 on 2019/11/14.
 //
 
-#ifndef LAB_DS_BINODE_HH
-#define LAB_DS_BINODE_HH
+#ifndef LAB_DS_LAB3_BINODE_HH_
+#define LAB_DS_LAB3_BINODE_HH_
 
 #include <functional>
 #include <iostream>
@@ -70,4 +70,4 @@ public:
 
 };
 };     // namespace lab3
-#endif // LAB_DS_BINODE_HH
+#endif // LAB_DS_LAB3_BINODE_HH_

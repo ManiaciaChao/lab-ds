@@ -58,6 +58,7 @@ auto scanHelper(T &var,
     std::cout << hint << " ";
   }
   scan(var, line);
+  bool f = compare(var);
   while (!compare(var)) {
     std::cout << err << " ";
     scan(var, line);

@@ -95,7 +95,7 @@ int main() {
       option = 0;
       displayMenu<ElemType, 20>(graph_array, graph_index);
       utils::scanHelper<ElemType>(option, [&](ElemType &var) {
-        return ((graph_array[graph_index] != nullptr && var > 0 && var <= 25)
+        return (var == 0 || (graph_array[graph_index] != nullptr && var > 0 && var <= 25)
             || (graph_array[graph_index] == nullptr && (var == 1 || var == 19)));
       }, "Choose an option:", "Invalid option, please re-input:");
       getchar();
@@ -116,6 +116,9 @@ int main() {
         case 3: {
           std::cout << "CreateGraph" << std::endl;
 //          getchar();
+          std::cout << "Input string-formed graph, ended with character '^'." << std::endl;
+          std::cout << "Example:" << std::endl;
+          std::cout << "\tA:1&C,B" << std::endl << "\tD:4^" << std::endl;
           std::string str;
           std::getline(std::cin, str, '^');
           std::istringstream str_buf{str};
